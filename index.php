@@ -3,19 +3,19 @@
 	<body>
 		<h1>Let's Have Fun With Math!</h1>
 		
-		<form action="mathGame.php" method="post">
+		<form action="index.php" method="post">
 			<table>
 				<tr>
 					<th>Email:<th> 
 					<td>
-						<input id="email" name="email" type="text" required />
+						<input type="text" id="email" name="email" />
 					</td>
 				</tr>
 				
 				<tr>
 					<th>Password:<th> 
 					<td>
-						<input id="pwd" name="password" type="password" required />
+						<input type="password" id="pwd" name="password" />
 					</td>
 				</tr>
 				
@@ -26,16 +26,26 @@
 				</tr>
 			</table>
 		</form>
-		
-		<div id="tester">
-			<?php
-				$email = $_POST["email"];
-				$pwd = $_POST["password"];
+	
+		<?php
+            //Email's regular expression
+            $rexpEmail = "/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$/";
+        
+            //Password's regular expression
+            $rexpPass = "/^aaa$/";
 			
-				if(isset($email)) {
-					echo $email;
-				}
-			?>
-		</div>
+			if (!empty($_POST["email"]) && preg_match($rexpEmail, $_POST["email"])) {
+                if (!empty($_POST["password"]) 
+                  && preg_match($rexpPass, $_POST["password"])) {
+                    header("Location: mathGame.php");
+                } else {
+                    echo "<p>Invalid Login. Try again.</p>";
+                }
+			} else {
+                echo "<p>Invalid Login. Try again.</p>";
+            }
+
+		?>
+
 		
 <?php include("footer.php"); ?>
