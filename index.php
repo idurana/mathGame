@@ -4,7 +4,7 @@
 		<h1>Let's Have Fun With Math!</h1>
 		
 		<form action="index.php" method="post">
-			<table>
+			<table class="table condensed">
 				<tr>
 					<th>Email:<th> 
 					<td>
@@ -33,18 +33,19 @@
         
             //Password's regular expression
             $rexpPass = "/^aaa$/";
-			
-			if (!empty($_POST["email"]) && preg_match($rexpEmail, $_POST["email"])) {
-                if (!empty($_POST["password"]) 
+        
+            $loginStatus = " ";
+		
+			if (isset($_POST["email"]) && preg_match($rexpEmail, $_POST["email"])) {
+                if (isset($_POST["password"]) 
                   && preg_match($rexpPass, $_POST["password"])) {
                     header("Location: mathGame.php");
-                } else {
-                    echo "<p>Invalid Login. Try again.</p>";
                 }
-			} else {
-                echo "<p>Invalid Login. Try again.</p>";
+            } else {
+                echo "<p>Invalid Login.</p>";
             }
-
+        
+            
 		?>
 
 		
